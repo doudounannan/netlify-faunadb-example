@@ -7,6 +7,7 @@
     "analytics": "^0.3.5",
     "faunadb": "^2.13.1",
     "markdown-magic": "^1.0.0",
+    "netlify-lambda": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
@@ -14,12 +15,28 @@
   "scripts": {
     "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
     "docs": "md-magic --path '**/*.md' --ignore 'node_modules'",
+    "checkForFaunaKey": "node ./scripts/check-for-fauna-key.js",
     "start": "netlify dev",
     "prebuild": "echo 'setup faunaDB' && npm run bootstrap",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "dev": "npm-run-all --parallel start:app start:server",
+    "start:app": "react-scripts start",
+    "start:server": "netlify-lambda serve functions -c ./webpack.config.js",
+    "prod": "npm-run-all --parallel build:**",
+    "build:app": "react-scripts build",
+    "build:functions": "netlify-lambda build functions -c ./webpack.config.js"
+  },
+  "proxy": {
+    "/.netlify/functions": {
+      "target": "http://localhost:9000",
+      "pathRewrite": {
+        "^/\\.netlify/functions": ""
+      }
+    }
   },
   "devDependencies": {
-    "netlify-cli": "^2.19.0"
+    "netlify-cli": "^2.19.0",
+    "npm-run-all": "^4.1.5"
   },
   "browserslist": [
     ">0.2%",

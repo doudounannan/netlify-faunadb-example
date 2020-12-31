@@ -7,7 +7,8 @@ Example of using [FaunaDB](https://fauna.com/) with [Netlify functions](https://
 <summary>Expand Table of Contents</summary>
 
 - [About this application](#about-this-application)
-- [Setup &amp; Run Locally](#setup--run-locally)
+- [Deploy with one click](#deploy-with-one-click)
+- [Setup & Run Locally](#setup--run-locally)
 - [TLDR; Quick Deploy](#tldr-quick-deploy)
 - [Tutorial](#tutorial)
   * [Background](#background)
